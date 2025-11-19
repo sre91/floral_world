@@ -50,7 +50,7 @@ const CartPage = () => {
               bg-[#1f3a2d] text-[#e6d9b5]
               border border-[#2b4a38]
               hover:bg-[#2b4a38] hover:border-[#c3b27d]
-              transition font-semibold
+              transition cursor-pointer font-semibold
             "
           >
             Continue Shopping
@@ -89,7 +89,7 @@ const CartPage = () => {
                       className="
                         w-8 h-8 rounded-lg text-[#e6d9b5]
                         bg-[#1f3a2d] border border-[#2b4a38]
-                        hover:bg-[#2b4a38] transition
+                        hover:bg-[#2b4a38] transition cursor-pointer
                       "
                     >
                       -
@@ -104,7 +104,7 @@ const CartPage = () => {
                       className="
                         w-8 h-8 rounded-lg text-[#e6d9b5]
                         bg-[#1f3a2d] border border-[#2b4a38]
-                        hover:bg-[#2b4a38] transition
+                        hover:bg-[#2b4a38] transition cursor-pointer
                       "
                     >
                       +
@@ -117,7 +117,7 @@ const CartPage = () => {
                 onClick={() => dispatch(removeFromCart(item._id))}
                 className="
                   bg-red-600 hover:bg-red-700
-                  text-white px-3 py-1 rounded-lg transition
+                  text-white px-3 py-1 rounded-lg transition cursor-pointer
                 "
               >
                 Remove
@@ -142,7 +142,7 @@ const CartPage = () => {
                 className="
                   px-5 py-2 rounded-xl
                   bg-[#3a3a3a] text-[#e6d9b5]
-                  hover:bg-[#4a4a4a] transition
+                  hover:bg-[#4a4a4a] transition cursor-pointer
                 "
               >
                 Clear Cart
@@ -154,7 +154,7 @@ const CartPage = () => {
                   px-6 py-2 rounded-xl font-semibold
                   bg-[#1f3a2d] text-[#e6d9b5] border border-[#2b4a38]
                   hover:bg-[#2b4a38] hover:border-[#c3b27d]
-                  transition
+                  transition cursor-pointer
                 "
               >
                 Checkout 🌿
