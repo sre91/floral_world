@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "rebuild": "echo rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,7 +21,6 @@
     "node-fetch": "^3.3.2",
     "openai": "^6.8.1",
     "stripe": "^19.3.0"
-
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
