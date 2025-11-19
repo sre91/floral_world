@@ -17,12 +17,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://floral-world.netlify.app",
-      "https://strong-tulumba-c7f618.netlify.app",
-      "https://YOUR-CUSTOM-SITE.netlify.app",
-    ],
+    origin: ["http://localhost:5173", "https://floral-world.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
