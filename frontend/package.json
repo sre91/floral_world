@@ -13,11 +13,10 @@
     "@reduxjs/toolkit": "^2.10.1",
     "@tailwindcss/vite": "^4.1.16",
     "axios": "^1.13.1",
-<<<<<<< HEAD
+
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.553.0",
-=======
->>>>>>> 0d921a1d88b454731656b1f09ab6660d0f860d96
+
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",

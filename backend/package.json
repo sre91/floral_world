@@ -16,14 +16,11 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.20.0",
-<<<<<<< HEAD
     "mongoose": "^8.19.2",
     "node-fetch": "^3.3.2",
     "openai": "^6.8.1",
     "stripe": "^19.3.0"
-=======
-    "mongoose": "^8.19.2"
->>>>>>> 0d921a1d88b454731656b1f09ab6660d0f860d96
+
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
