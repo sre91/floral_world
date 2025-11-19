@@ -1,0 +1,136 @@
+<<<<<<< HEAD
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import User from "../models/User";
+
+dotenv.config();
+const router = express.Router();
+
+router.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const existingUser = await User.findOne({ email }).exec();
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("❌ Registration error:", error);
+    res.status(500).json({ message: "Server error during registration" });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find user by email
+=======
+import { Router, Request, Response } from "express";
+import User from "../models/User";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { verifyToken } from "../middleware/authMiddleware";
+
+const router = Router();
+
+// 🪴 Register route
+router.post("/register", async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const saltRounds = 10;
+    const hashPassword = await bcrypt.hash(password, saltRounds);
+
+    const newUser = new User({ name, email, password: hashPassword });
+
+    await newUser.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// 🪴 Login
+router.post("/login", async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // find user
+>>>>>>> 0d921a1d88b454731656b1f09ab6660d0f860d96
+    const user = await User.findOne({ email }).exec();
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+<<<<<<< HEAD
+    // Compare hashed passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    // Create JWT token including isAdmin
+    const token = jwt.sign(
+      { id: user._id, email: user.email, isAdmin: user.isAdmin },
+=======
+    // compare plain and hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    // create JWT
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+>>>>>>> 0d921a1d88b454731656b1f09ab6660d0f860d96
+      process.env.JWT_SECRET!,
+      { expiresIn: "1h" }
+    );
+
+<<<<<<< HEAD
+    // Send token and user info to frontend
+    res.json({
+      token,
+      user: {
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      },
+    });
+  } catch (error) {
+    console.error("❌ Login error:", error);
+    res.status(500).json({ message: "Server error during login" });
+  }
+});
+
+=======
+    res.json({
+      message: "Login successful",
+      token,
+      user: { name: user.name, email: user.email },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/profile", verifyToken, (req: any, res: Response) => {
+  res.json({ message: `Welcome ${req.user.email}` });
+});
+
+>>>>>>> 0d921a1d88b454731656b1f09ab6660d0f860d96
+export default router;
