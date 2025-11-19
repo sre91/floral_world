@@ -29,7 +29,7 @@ const ChatBot = () => {
     setInput("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/ai/ask", {
+      const res = await fetch("https://floral-world.onrender.com/api/ai/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userInput }),
@@ -38,7 +38,7 @@ const ChatBot = () => {
       const data = await res.json();
       const botMsg: Message = {
         sender: "bot",
-        text: data.answer || "🌿 I couldn’t find an answer.",
+        text: data.answer || "🌿 I couldn't find an answer.",
       };
       setMessages((prev) => [...prev, botMsg]);
     } catch (error) {

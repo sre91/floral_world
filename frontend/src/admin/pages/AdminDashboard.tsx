@@ -16,7 +16,7 @@ const AdminDashboard: React.FC = () => {
       try {
         const token = localStorage.getItem("token");
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/stats",
+          "https://floral-world.onrender.com/api/admin/stats",
           {
             headers: { Authorization: `Bearer ${token}` },
           }

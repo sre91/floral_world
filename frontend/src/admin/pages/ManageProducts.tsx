@@ -29,7 +29,9 @@ const ManageProducts: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/products");
+        const { data } = await axios.get(
+          "https://floral-world.onrender.com/api/products"
+        );
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -55,7 +57,7 @@ const ManageProducts: React.FC = () => {
       }
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/products",
+        "https://floral-world.onrender.com/api/products",
         newProduct,
         {
           headers: {
@@ -88,7 +90,7 @@ const ManageProducts: React.FC = () => {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/products/${editingProduct._id}`,
+        `https://floral-world.onrender.com/api/products/${editingProduct._id}`,
         editingProduct,
         {
           headers: {
@@ -116,9 +118,12 @@ const ManageProducts: React.FC = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://floral-world.onrender.com/api/products/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setProducts((prev) => prev.filter((p) => p._id !== id));
       alert("Product deleted!");

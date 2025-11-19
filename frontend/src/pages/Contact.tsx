@@ -28,7 +28,7 @@ export default function Contact() {
       </h1>
 
       <p className="text-center text-[#b9b08d] max-w-2xl mx-auto mb-12 text-lg">
-        Have a question or need plant advice? We’re always here to help you grow
+        Have a question or need plant advice? We're always here to help you grow
         your green space.
       </p>
 

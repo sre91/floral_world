@@ -17,9 +17,12 @@ const ManageUsers: React.FC = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get("http://localhost:5000/api/users", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const { data } = await axios.get(
+          "https://floral-world.onrender.com/api/users",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setUsers(data);
       } catch (error) {
         console.error("Failed to fetch users:", error);
@@ -36,7 +39,7 @@ const ManageUsers: React.FC = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/users/${id}`, {
+      await axios.delete(`https://floral-world.onrender.com/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers((prev) => prev.filter((u) => u._id !== id));

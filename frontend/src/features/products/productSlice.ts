@@ -22,9 +22,12 @@ export const fetchProducts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/products", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        "https://floral-world.onrender.com/api/products",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       return res.data; // returns array of products
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
