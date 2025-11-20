@@ -1,14 +1,16 @@
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import api from "../api/axiosInstance";
 
 const Signup = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +22,29 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      await axios.post("/api/auth/register", formData);
+      // Correct API call using axiosInstance
+      await api.post("/auth/register", formData);
+
       alert("Registration successful!");
       navigate("/login");
-    } catch (err) {
-      const error = err as AxiosError<{ message?: string }>;
-      alert(error.response?.data?.message || "Registration failed.");
+    } catch (err: unknown) {
+      // Full TypeScript-safe error handling
+      if (
+        err &&
+        typeof err === "object" &&
+        "response" in err &&
+        (err as { response?: { data?: { message?: string } } }).response
+      ) {
+        const errorData = (
+          err as {
+            response?: { data?: { message?: string } };
+          }
+        ).response;
+
+        alert(errorData?.data?.message || "Registration failed.");
+      } else {
+        alert("Registration failed.");
+      }
     } finally {
       setLoading(false);
     }
@@ -46,11 +65,8 @@ const Signup = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="
-              w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
-              border border-[#2c3e34] focus:border-[#c3b27d]
-              outline-none transition
-            "
+            className="w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
+              border border-[#2c3e34] focus:border-[#c3b27d] outline-none transition"
           />
 
           <input
@@ -60,11 +76,8 @@ const Signup = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="
-              w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
-              border border-[#2c3e34] focus:border-[#c3b27d]
-              outline-none transition
-            "
+            className="w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
+              border border-[#2c3e34] focus:border-[#c3b27d] outline-none transition"
           />
 
           <input
@@ -74,22 +87,17 @@ const Signup = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="
-              w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
-              border border-[#2c3e34] focus:border-[#c3b27d]
-              outline-none transition
-            "
+            className="w-full p-3 rounded-xl bg-[#0f1a14] text-[#e6d9b5]
+              border border-[#2c3e34] focus:border-[#c3b27d] outline-none transition"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="
-              w-full py-3 rounded-xl font-semibold transition cursor-pointer
+            className="w-full py-3 rounded-xl font-semibold transition cursor-pointer
               bg-[#1f3a2d] text-[#e6d9b5] border border-[#2b4a38]
               hover:bg-[#2b4a38] hover:border-[#c3b27d]
-              disabled:bg-[#3a5a48] disabled:text-[#9aa898] disabled:cursor-not-allowed
-            "
+              disabled:bg-[#3a5a48] disabled:text-[#9aa898] disabled:cursor-not-allowed"
           >
             {loading ? "Registering..." : "Register"}
           </button>
